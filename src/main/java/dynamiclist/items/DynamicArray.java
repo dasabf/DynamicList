@@ -3,6 +3,9 @@ package dynamiclist.items;
 import dynamiclist.interfaces.DynamicList;
 
 
+/**
+ * The type Dynamic array.
+ */
 public class DynamicArray implements DynamicList {
     private int DEFAULTSIZE = 5;
     private int[] arr = new int[5];
@@ -35,13 +38,24 @@ public class DynamicArray implements DynamicList {
     }
 
     @Override
-    public void set(int pos, int item) {
-
+    public int set(int pos, int item) {
+        if(pos<0 || pos>=counter){
+            return -1;
+        }else{
+            arr[pos]=item;
+            return 1;
+        }
     }
 
     @Override
     public int get(int pos) {
-        return 0;
+        int res=0;
+        try{
+            res = arr[pos];
+        }catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        return res;
     }
 
     @Override
@@ -51,6 +65,9 @@ public class DynamicArray implements DynamicList {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        if(counter==0)
+            return true;
+        else
+            return false;
     }
 }
