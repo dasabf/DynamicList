@@ -26,4 +26,24 @@ public class TestArray {
         d.add(8);
         Assert.assertEquals(d.size(), 8);
     }
+    @Test(priority=2)
+    public void deleteTest(){
+        DynamicArray d = new DynamicArray();
+        d.add(5);
+        d.add(6);
+        d.add(7);
+        d.add(8);
+        d.add(8);
+        d.add(8);
+        d.add(8);
+        d.add(8);
+        Assert.assertEquals(d.size(), 8);
+        for(int i=0;i<d.size();i++)
+            System.out.print(d.get(i)+" ");
+        d.removeLast();
+        System.out.println();
+        Assert.assertEquals(d.size(), 7);
+        for(int i=0;i<d.size();i++)
+            System.out.print(d.get(i)+" ");
+    }
 }

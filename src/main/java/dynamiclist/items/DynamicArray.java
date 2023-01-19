@@ -60,7 +60,11 @@ public class DynamicArray implements DynamicList {
 
     @Override
     public void removeLast() {
-
+          int[] tempArray = new int[counter-1];
+          for(int i=0;i<tempArray.length;i++)
+              tempArray[i]=arr[i];
+          arr=tempArray;
+          counter--;
     }
 
     @Override
