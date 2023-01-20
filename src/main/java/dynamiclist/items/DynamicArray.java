@@ -7,17 +7,19 @@ import dynamiclist.interfaces.DynamicList;
  * The type Dynamic array.
  */
 public class DynamicArray implements DynamicList {
-    private int DEFAULTSIZE = 5;
+    private static final int DEFAULTSIZE = 5;
+    private int currentSize = DEFAULTSIZE;
     private int[] arr = new int[5];
     private int counter=0;
 
     private void adjustSize(){
-        int newSize = DEFAULTSIZE*2;
+        int newSize = currentSize*2;
         int[] arrTemp = new int[newSize];
         for(int i=0;i<DEFAULTSIZE;i++){
             arrTemp[i]=arr[i];
         }
         arr = arrTemp;
+        currentSize = newSize;
     }
 
     @Override
@@ -25,7 +27,10 @@ public class DynamicArray implements DynamicList {
         if(counter<DEFAULTSIZE){
             arr[counter] = item;
             counter++;
-        }else{
+        } else if (counter<currentSize) {
+            arr[counter] = item;
+            counter++;
+        } else{
             adjustSize();
             arr[counter] = item;
             counter++;
@@ -60,11 +65,11 @@ public class DynamicArray implements DynamicList {
 
     @Override
     public void removeLast() {
-          int[] tempArray = new int[counter-1];
-          for(int i=0;i<tempArray.length;i++)
+          int[] tempArray = new int[currentSize];
+          counter--;
+          for(int i=0;i<counter;i++)
               tempArray[i]=arr[i];
           arr=tempArray;
-          counter--;
     }
 
     @Override
@@ -74,4 +79,32 @@ public class DynamicArray implements DynamicList {
         else
             return false;
     }
+
+    /**
+     * Pop item int.
+     *
+     * @param item the item
+     * @return the int
+     */
+    public int popItem(int item){
+        int pos=0;
+        for(int i=0;i<currentSize;i++){
+            if(arr[i]==item){
+                pos=i;
+                break;
+            }
+        }
+        int[] arr1 = new int[currentSize];
+        for(int i=0;i<pos;i++){
+             arr1[i]=arr[i];
+        }
+        for(int i=pos;i<arr1.length-1;i++){
+            arr1[i]=arr[i+1];
+        }
+        arr = arr1;
+        counter--;
+        return pos;
+    }
+
+
 }
