@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/dasabf/DynamicList.svg)](https://jitpack.io/#dasabf/DynamicList)
 # DynamicList
 It is a interface which dynamically stores values
 
